@@ -124,20 +124,41 @@ class HapticManager {
 
     // MARK: - Emotional Haptics
 
+//    func playHugHaptic() {
+//        let events: [CHHapticEvent] = [
+//            CHHapticEvent(eventType: .hapticContinuous,
+//                          parameters: [.init(parameterID: .hapticIntensity, value: 0.3),
+//                                       .init(parameterID: .hapticSharpness, value: 0.2)],
+//                          relativeTime: 0,
+//                          duration: 1.5),
+//            CHHapticEvent(eventType: .hapticTransient,
+//                          parameters: [.init(parameterID: .hapticIntensity, value: 0.2),
+//                                       .init(parameterID: .hapticSharpness, value: 0.1)],
+//                          relativeTime: 1.6)
+//        ]
+//        playPattern(events)
+//    }
+    
     func playHugHaptic() {
-        let events: [CHHapticEvent] = [
-            CHHapticEvent(eventType: .hapticContinuous,
-                          parameters: [.init(parameterID: .hapticIntensity, value: 0.3),
-                                       .init(parameterID: .hapticSharpness, value: 0.2)],
-                          relativeTime: 0,
-                          duration: 1.5),
-            CHHapticEvent(eventType: .hapticTransient,
-                          parameters: [.init(parameterID: .hapticIntensity, value: 0.2),
-                                       .init(parameterID: .hapticSharpness, value: 0.1)],
-                          relativeTime: 1.6)
-        ]
-        playPattern(events)
+        let buildUp = CHHapticEvent(eventType: .hapticContinuous,
+                                     parameters: [.init(parameterID: .hapticIntensity, value: 0.25),
+                                                  .init(parameterID: .hapticSharpness, value: 0.2)],
+                                     relativeTime: 0,
+                                     duration: 1.5)
+
+        let pulse1 = CHHapticEvent(eventType: .hapticTransient,
+                                    parameters: [.init(parameterID: .hapticIntensity, value: 0.3),
+                                                 .init(parameterID: .hapticSharpness, value: 0.1)],
+                                    relativeTime: 1.6)
+
+        let pulse2 = CHHapticEvent(eventType: .hapticTransient,
+                                    parameters: [.init(parameterID: .hapticIntensity, value: 0.25),
+                                                 .init(parameterID: .hapticSharpness, value: 0.1)],
+                                    relativeTime: 2.0)
+
+        playPattern([buildUp, pulse1, pulse2])
     }
+
 
     func playWarmthHaptic() {
         let warmth = CHHapticEvent(eventType: .hapticContinuous,
@@ -158,17 +179,42 @@ class HapticManager {
         playPattern(events)
     }
 
+//    func playMissingYouHaptic() {
+//        let events: [CHHapticEvent] = [
+//            CHHapticEvent(eventType: .hapticTransient,
+//                          parameters: [.init(parameterID: .hapticIntensity, value: 0.65),
+//                                       .init(parameterID: .hapticSharpness, value: 0.5)],
+//                          relativeTime: 0),
+//            CHHapticEvent(eventType: .hapticTransient,
+//                          parameters: [.init(parameterID: .hapticIntensity, value: 0.5),
+//                                       .init(parameterID: .hapticSharpness, value: 0.3)],
+//                          relativeTime: 1.0)
+//        ]
+//        playPattern(events)
+//    }
     func playMissingYouHaptic() {
-        let events: [CHHapticEvent] = [
-            CHHapticEvent(eventType: .hapticTransient,
-                          parameters: [.init(parameterID: .hapticIntensity, value: 0.65),
-                                       .init(parameterID: .hapticSharpness, value: 0.5)],
-                          relativeTime: 0),
-            CHHapticEvent(eventType: .hapticTransient,
-                          parameters: [.init(parameterID: .hapticIntensity, value: 0.5),
-                                       .init(parameterID: .hapticSharpness, value: 0.3)],
-                          relativeTime: 1.0)
-        ]
-        playPattern(events)
+        let beat1 = CHHapticEvent(eventType: .hapticTransient,
+                                  parameters: [.init(parameterID: .hapticIntensity, value: 0.6),
+                                               .init(parameterID: .hapticSharpness, value: 0.3)],
+                                  relativeTime: 0)
+
+        let silence = CHHapticEvent(eventType: .hapticContinuous,
+                                     parameters: [.init(parameterID: .hapticIntensity, value: 0),
+                                                  .init(parameterID: .hapticSharpness, value: 0)],
+                                     relativeTime: 0.1,
+                                     duration: 0.9)
+
+        let beat2 = CHHapticEvent(eventType: .hapticTransient,
+                                  parameters: [.init(parameterID: .hapticIntensity, value: 0.5),
+                                               .init(parameterID: .hapticSharpness, value: 0.2)],
+                                  relativeTime: 1.0)
+
+        let echo = CHHapticEvent(eventType: .hapticTransient,
+                                  parameters: [.init(parameterID: .hapticIntensity, value: 0.2),
+                                               .init(parameterID: .hapticSharpness, value: 0.1)],
+                                  relativeTime: 1.5)
+
+        playPattern([beat1, silence, beat2, echo])
     }
+
 }
